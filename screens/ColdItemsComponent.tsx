@@ -5,7 +5,7 @@ import ColdItemCard from "./ColdItemCard";
 
 const ColdItemsComponent: React.FC = () => {
   return (
-    <View style={{ backgroundColor: "#FF6347", padding: 10 }}>
+    <View className="mx-2">
       <Text style={{ fontWeight: "bold", marginBottom: 5 }}>COLD ITEMS</Text>
       {coldItemsData.map((item: string, index: number) => (
         <ColdItemCard key={index} itemName={item} />
