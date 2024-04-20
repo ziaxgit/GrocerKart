@@ -1,4 +1,4 @@
-// ItemCard.tsx
+// DryItemCard.tsx
 import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
@@ -8,12 +8,12 @@ interface Props {
   itemQuantity: string;
 }
 
-const ItemCard: React.FC<Props> = ({ itemName, itemQuantity }) => {
-  const { addItemToOrder } = useItemsToOrder();
+const DryItemCard: React.FC<Props> = ({ itemName, itemQuantity }) => {
+  const { addDryItemToOrder } = useItemsToOrder();
 
   const handleQuantityChange = (value: string) => {
     const item = { name: itemName, quantity: value };
-    addItemToOrder(item);
+    addDryItemToOrder(item);
   };
 
   return (
@@ -31,4 +31,4 @@ const ItemCard: React.FC<Props> = ({ itemName, itemQuantity }) => {
   );
 };
 
-export default ItemCard;
+export default DryItemCard;

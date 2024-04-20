@@ -7,8 +7,10 @@ interface Item {
 }
 
 interface ItemsToOrderContextType {
-  itemsToOrder: Item[];
-  addItemToOrder: (item: Item) => void;
+  coldItems: Item[];
+  dryItems: Item[];
+  addColdItemToOrder: (item: Item) => void;
+  addDryItemToOrder: (item: Item) => void;
 }
 
 const ItemsToOrderContext = createContext<ItemsToOrderContextType | undefined>(
@@ -26,27 +28,51 @@ export const useItemsToOrder = () => {
 };
 
 export const ItemsToOrderProvider: React.FC = ({ children }) => {
-  const [itemsToOrder, setItemsToOrder] = useState<Item[]>([]);
+  const [coldItems, setColdItems] = useState<Item[]>([]);
+  const [dryItems, setDryItems] = useState<Item[]>([]);
 
-  const addItemToOrder = (item: Item) => {
-    // Check if the item already exists in the itemsToOrder array
-    const existingItemIndex = itemsToOrder.findIndex(
-      (existingItem) => existingItem.name === item.name
-    );
+  const addColdItemToOrder = (item: Item) => {
+    if (parseInt(item.quantity) > 0) {
+      const existingItemIndex = coldItems.findIndex(
+        (existingItem) => existingItem.name === item.name
+      );
 
-    // If the item already exists, update its quantity
-    if (existingItemIndex !== -1) {
-      const updatedItems = [...itemsToOrder];
-      updatedItems[existingItemIndex].quantity = item.quantity;
-      setItemsToOrder(updatedItems);
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...coldItems];
+        updatedItems[existingItemIndex].quantity = item.quantity;
+        setColdItems(updatedItems);
+      } else {
+        setColdItems([...coldItems, item]);
+      }
     } else {
-      // If the item doesn't exist, add it to the itemsToOrder array
-      setItemsToOrder([...itemsToOrder, item]);
+      // Remove item if quantity is 0
+      setColdItems(coldItems.filter((i) => i.name !== item.name));
+    }
+  };
+
+  const addDryItemToOrder = (item: Item) => {
+    if (parseInt(item.quantity) > 0) {
+      const existingItemIndex = dryItems.findIndex(
+        (existingItem) => existingItem.name === item.name
+      );
+
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...dryItems];
+        updatedItems[existingItemIndex].quantity = item.quantity;
+        setDryItems(updatedItems);
+      } else {
+        setDryItems([...dryItems, item]);
+      }
+    } else {
+      // Remove item if quantity is 0
+      setDryItems(dryItems.filter((i) => i.name !== item.name));
     }
   };
 
   return (
-    <ItemsToOrderContext.Provider value={{ itemsToOrder, addItemToOrder }}>
+    <ItemsToOrderContext.Provider
+      value={{ coldItems, dryItems, addColdItemToOrder, addDryItemToOrder }}
+    >
       {children}
     </ItemsToOrderContext.Provider>
   );

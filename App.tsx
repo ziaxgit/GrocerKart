@@ -1,15 +1,10 @@
+// App.tsx
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
 import { ItemsToOrderProvider } from "./screens/ItemsToOrderContext";
-import ColdItemsComponent from "./screens/coldItemsComponent";
+import ColdItemsComponent from "./screens/ColdItemsComponent";
+import DryItemsComponent from "./screens/DryItemsComponent";
 import OrderDetails from "./screens/OrderDetails";
 
 export default function App() {
@@ -32,6 +27,7 @@ export default function App() {
           </Text>
           <StatusBar style="auto" />
           <ColdItemsComponent />
+          <DryItemsComponent />
           <TouchableOpacity
             style={{
               backgroundColor: "#008000",
