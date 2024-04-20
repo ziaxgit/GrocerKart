@@ -29,7 +29,20 @@ export const ItemsToOrderProvider: React.FC = ({ children }) => {
   const [itemsToOrder, setItemsToOrder] = useState<Item[]>([]);
 
   const addItemToOrder = (item: Item) => {
-    setItemsToOrder([...itemsToOrder, item]);
+    // Check if the item already exists in the itemsToOrder array
+    const existingItemIndex = itemsToOrder.findIndex(
+      (existingItem) => existingItem.name === item.name
+    );
+
+    // If the item already exists, update its quantity
+    if (existingItemIndex !== -1) {
+      const updatedItems = [...itemsToOrder];
+      updatedItems[existingItemIndex].quantity = item.quantity;
+      setItemsToOrder(updatedItems);
+    } else {
+      // If the item doesn't exist, add it to the itemsToOrder array
+      setItemsToOrder([...itemsToOrder, item]);
+    }
   };
 
   return (
