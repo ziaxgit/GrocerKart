@@ -6,9 +6,7 @@ import ColdItemCard from "./ColdItemCard";
 const ColdItemsComponent: React.FC = () => {
   return (
     <View className="mx-2 b-">
-      <Text className="mx-2" style={{ fontWeight: "bold", marginBottom: 5 }}>
-        COLD ITEMS
-      </Text>
+      <Text className="mx-2 font-bold m-2">COLD ITEMS</Text>
       {coldItemsData.map((item: string, index: number) => (
         <ColdItemCard key={index} itemName={item} />
       ))}

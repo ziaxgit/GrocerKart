@@ -1,55 +1,46 @@
-// App.tsx
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
-import { ItemsToOrderProvider } from "./screens/ItemsToOrderContext";
-import ColdItemsComponent from "./screens/ColdItemsComponent";
-import DryItemsComponent from "./screens/DryItemsComponent";
-import OrderDetails from "./screens/OrderDetails";
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "./screens/HomeScreen";
+import PastOrders from "./screens/PastOrders";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [showOrderDetails, setShowOrderDetails] = useState(false);
-
   return (
-    <SafeAreaView className="bg-" style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1 }}>
-        <ItemsToOrderProvider>
-          <Text
-            style={{
-              textAlign: "center",
-              fontSize: 20,
-              fontWeight: "bold",
-              marginTop: 10,
-              marginBottom: 20,
-            }}
-          >
-            GROCERY ORDER
-          </Text>
-          <StatusBar style="auto" />
-          <ColdItemsComponent />
-          <DryItemsComponent />
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#008000",
-              marginTop: 20,
-              marginHorizontal: 50,
-              padding: 10,
-            }}
-            onPress={() => setShowOrderDetails(true)}
-          >
-            <Text
-              style={{
-                color: "white",
-                textAlign: "center",
-                fontWeight: "bold",
-              }}
-            >
-              Confirm Order
-            </Text>
-          </TouchableOpacity>
-          {showOrderDetails && <OrderDetails />}
-        </ItemsToOrderProvider>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Create Order",
+            headerTitle: "Grocery Order",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="plus-circle"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Order History"
+          component={PastOrders}
+          options={{
+            tabBarLabel: "Order History",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="history"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
