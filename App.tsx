@@ -11,7 +11,7 @@ export default function App() {
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
   return (
-    <SafeAreaView className="bg-white" style={{ flex: 1 }}>
+    <SafeAreaView className="bg-" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         <ItemsToOrderProvider>
           <Text
