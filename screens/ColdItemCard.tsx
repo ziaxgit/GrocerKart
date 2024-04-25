@@ -1,5 +1,5 @@
 // ColdItemCard.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import { AntDesign } from "@expo/vector-icons";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ColdItemCard: React.FC<Props> = ({ itemName }) => {
-  const { addColdItemToOrder } = useItemsToOrder();
+  const { addColdItemToOrder, resetItems, setResetItems } = useItemsToOrder();
   const [quantity, setQuantity] = useState("0");
   const [isQuantityChanged, setIsQuantityChanged] = useState(false);
 
@@ -37,6 +37,14 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
     const item = { name: itemName, quantity: updatedQuantity.toString() }; // Use the updated quantity
     addColdItemToOrder(item);
   };
+
+  useEffect(() => {
+    if (resetItems) {
+      setQuantity("0");
+      setIsQuantityChanged(false);
+      setResetItems(false);
+    }
+  }, [resetItems]);
 
   return (
     <View

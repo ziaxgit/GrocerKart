@@ -16,8 +16,10 @@ const OrderDetails: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
 
   // Function to generate a string of items separated by a line break
-  const generateItemsString = (items) => {
-    return items.map((item) => `${item.quantity} x ${item.name}`).join("\n");
+  const generateItemsString = (items: any[]) => {
+    return items
+      .map((item: any) => `${item.quantity} x ${item.name}`)
+      .join("\n");
   };
 
   const copyToClipboard = async () => {

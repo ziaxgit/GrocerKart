@@ -1,5 +1,5 @@
 // ItemsToOrderContext.tsx
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface Item {
   name: string;
@@ -11,6 +11,9 @@ interface ItemsToOrderContextType {
   dryItems: Item[];
   addColdItemToOrder: (item: Item) => void;
   addDryItemToOrder: (item: Item) => void;
+  resetOrderItems: () => void;
+  resetItems: boolean;
+  setResetItems: (reset: boolean) => void;
 }
 
 const ItemsToOrderContext = createContext<ItemsToOrderContextType | undefined>(
@@ -27,9 +30,16 @@ export const useItemsToOrder = () => {
   return context;
 };
 
-export const ItemsToOrderProvider: React.FC = ({ children }) => {
+interface ItemsToOrderProviderProps {
+  children: React.ReactNode;
+}
+
+export const ItemsToOrderProvider: React.FC<ItemsToOrderProviderProps> = ({
+  children,
+}) => {
   const [coldItems, setColdItems] = useState<Item[]>([]);
   const [dryItems, setDryItems] = useState<Item[]>([]);
+  const [resetItems, setResetItems] = useState<boolean>(false); // New state to trigger item reset
 
   const addColdItemToOrder = (item: Item) => {
     if (parseInt(item.quantity) > 0) {
@@ -69,9 +79,29 @@ export const ItemsToOrderProvider: React.FC = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    if (resetItems) {
+      setColdItems([]); // Clear cold items
+      setDryItems([]); // Clear dry items
+      setResetItems(false); // Reset the state
+    }
+  }, [resetItems]);
+
+  const resetOrderItems = () => {
+    setResetItems(true);
+  };
+
   return (
     <ItemsToOrderContext.Provider
-      value={{ coldItems, dryItems, addColdItemToOrder, addDryItemToOrder }}
+      value={{
+        coldItems,
+        dryItems,
+        addColdItemToOrder,
+        addDryItemToOrder,
+        resetOrderItems,
+        resetItems,
+        setResetItems,
+      }}
     >
       {children}
     </ItemsToOrderContext.Provider>
