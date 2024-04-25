@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, Modal, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
 
 const OrderDetails: React.FC = () => {
   const { coldItems, dryItems } = useItemsToOrder();
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(true);
 
   // Function to generate a string of items separated by a line break
   const generateItemsString = (items) => {
@@ -24,25 +31,63 @@ const OrderDetails: React.FC = () => {
 
   // Add an extra line break between cold and dry items
   const combinedItemsString = coldItemsString + "\n\n" + dryItemsString;
-
   return (
-    <Modal visible={isModalVisible}>
+    <Modal
+      visible={isModalVisible}
+      animationType="slide"
+      presentationStyle="fullScreen"
+    >
       <SafeAreaProvider>
-        <SafeAreaView>
-          <View>
-            <Text>ORDER DETAILS</Text>
-            <Text>{combinedItemsString}</Text>
-          </View>
-          <TouchableOpacity onPress={copyToClipboard}>
-            <Text>COPY ORDER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-            <Text>CLOSE</Text>
-          </TouchableOpacity>
+        <SafeAreaView style={styles.container}>
+          <ScrollView>
+            <View>
+              <Text>ORDER DETAILS</Text>
+              <Text>{combinedItemsString}</Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                className="rounded-full"
+                onPress={copyToClipboard}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>COPY ORDER</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="rounded-full"
+                onPress={() => setIsModalVisible(false)}
+                style={styles.button}
+              >
+                <Text style={styles.buttonText}>CLOSE</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </SafeAreaView>
       </SafeAreaProvider>
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+    padding: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  button: {
+    backgroundColor: "#008000",
+    padding: 10,
+    borderRadius: 5,
+    width: "48%", // Adjust button width as needed
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+});
 
 export default OrderDetails;
