@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
-import { useItemsToOrder } from "../screens/ItemsToOrderContext"; // Import the useItemsToOrder hook
+import { useItemsToOrder } from "./components/ItemsToOrderContext"; // Import the useItemsToOrder hook
 import ColdItemsComponent from "../screens/ColdItemsComponent";
 import DryItemsComponent from "../screens/DryItemsComponent";
 import OrderDetails from "../screens/OrderDetails";
