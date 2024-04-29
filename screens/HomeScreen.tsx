@@ -6,9 +6,8 @@ import ColdItemsComponent from "../components/ColdItemsComponent";
 import DryItemsComponent from "../components/DryItemsComponent";
 import OrderDetails from "../components/OrderDetails";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values
-  const [showOrderDetails, setShowOrderDetails] = useState(false);
 
   const handleResetClick = () => {
     resetOrderItems();
@@ -23,7 +22,7 @@ export default function HomeScreen() {
         <DryItemsComponent />
         <TouchableOpacity
           className="rounded-full p-3 mb-2 bg-blue-500 mx-2"
-          onPress={() => setShowOrderDetails(!showOrderDetails)}
+          onPress={() => navigation.navigate("OrderDetails")}
         >
           <Text className="text-white font-bold text-center">
             CONFIRM ORDER
@@ -35,7 +34,6 @@ export default function HomeScreen() {
         >
           <Text className="text-white font-bold text-center">RESET</Text>
         </TouchableOpacity>
-        {showOrderDetails && <OrderDetails />}
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,49 +1,29 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ItemsToOrderProvider } from "./components/ItemsToOrderContext"; // Import the context provider
 import HomeScreen from "./screens/HomeScreen";
-import PastOrders from "./screens/PastOrdersScreen";
+import HomeNavigation from "./navigation/HomeTabNavigation";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
+import OrderDetails from "./components/OrderDetails";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import HomeNavigation from "./navigation/HomeStackNavigation";
-
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <ItemsToOrderProvider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Homes"
+        <Stack.Navigator>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Home"
             component={HomeNavigation}
-            options={{
-              tabBarLabel: "Create Order",
-              headerTitle: "Grocery Order",
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="plus-circle"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
           />
-          <Tab.Screen
-            name="Order History"
-            component={PastOrders}
-            options={{
-              tabBarLabel: "Order History",
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="history"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
+          <Stack.Screen
+            options={{ title: "Order Details" }}
+            name="OrderDetails"
+            component={OrderDetails}
           />
-        </Tab.Navigator>
+        </Stack.Navigator>
       </NavigationContainer>
     </ItemsToOrderProvider>
   );

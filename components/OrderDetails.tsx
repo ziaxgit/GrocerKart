@@ -34,38 +34,36 @@ const OrderDetails: React.FC = () => {
   // Add an extra line break between cold and dry items
   const combinedItemsString = coldItemsString + "\n\n" + dryItemsString;
   return (
-    <Modal
-      visible={isModalVisible}
-      animationType="slide"
-      presentationStyle="fullScreen"
-    >
-      <SafeAreaProvider>
-        <SafeAreaView style={styles.container}>
-          <ScrollView>
-            <View>
-              <Text>ORDER DETAILS</Text>
-              <Text>{combinedItemsString}</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                className="rounded-full"
-                onPress={copyToClipboard}
-                style={styles.button}
-              >
-                <Text style={styles.buttonText}>COPY ORDER</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                className="rounded-full"
-                onPress={() => setIsModalVisible(false)}
-                style={styles.button}
-              >
-                <Text style={styles.buttonText}>CLOSE</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </SafeAreaProvider>
-    </Modal>
+    // <Modal
+    //   visible={isModalVisible}
+    //   animationType="slide"
+    //   presentationStyle="fullScreen"
+    // >
+    //   <SafeAreaProvider>
+    <ScrollView>
+      <View>
+        <Text>ORDER DETAILS</Text>
+        <Text>{combinedItemsString}</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          className="rounded-full"
+          onPress={copyToClipboard}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>COPY ORDER</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="rounded-full"
+          onPress={() => setIsModalVisible(false)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Go Back</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+    // </SafeAreaProvider>
+    // </Modal>
   );
 };
 
@@ -74,6 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     padding: 20,
+    backgroundColor: "gray",
   },
   buttonContainer: {
     flexDirection: "row",
