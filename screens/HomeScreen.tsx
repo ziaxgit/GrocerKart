@@ -10,6 +10,11 @@ export default function HomeScreen() {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
+  const handleResetClick = () => {
+    resetOrderItems();
+    alert("Order resetted");
+  };
+
   return (
     <SafeAreaView className="bg-" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
@@ -25,7 +30,7 @@ export default function HomeScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => resetOrderItems()}
+          onPress={handleResetClick}
           className="rounded-full p-3 mb-2 bg-gray-600 mx-2"
         >
           <Text className="text-white font-bold text-center">RESET</Text>
