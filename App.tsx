@@ -1,10 +1,11 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ItemsToOrderProvider } from "./screens/ItemsToOrderContext"; // Import the context provider
+import { ItemsToOrderProvider } from "./components/ItemsToOrderContext"; // Import the context provider
 import HomeScreen from "./screens/HomeScreen";
-import PastOrders from "./screens/PastOrders";
+import PastOrders from "./screens/PastOrdersScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import HomeNavigation from "./navigation/HomeStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +15,8 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
-            name="Home"
-            component={HomeScreen}
+            name="Homes"
+            component={HomeNavigation}
             options={{
               tabBarLabel: "Create Order",
               headerTitle: "Grocery Order",

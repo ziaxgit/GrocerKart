@@ -4,6 +4,8 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import { AntDesign } from "@expo/vector-icons";
 import * as Haptic from "expo-haptics";
+import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 interface Props {
   itemName: string;
@@ -48,14 +50,14 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
 
   return (
     <View
-      className={`flex-row justify-between shadow-sm ${
+      className={`shadow-sm flex-row justify-between ${
         isQuantityChanged && Number(quantity) > 0 ? "bg-green-200" : "bg-white"
       } py-1 px-2 m-1 rounded-xl`}
     >
       <View className="justify-center">
         <Text>{itemName}</Text>
       </View>
-      <View className="flex-row gap-1 ">
+      <View className="flex-row gap-1 justify-center">
         <TouchableOpacity onPress={decrementQuantity}>
           <AntDesign name="minuscircleo" size={24} color="red" />
         </TouchableOpacity>

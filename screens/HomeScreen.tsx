@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
-import { useItemsToOrder } from "./components/ItemsToOrderContext"; // Import the useItemsToOrder hook
-import ColdItemsComponent from "../screens/ColdItemsComponent";
-import DryItemsComponent from "../screens/DryItemsComponent";
-import OrderDetails from "../screens/OrderDetails";
+import { useItemsToOrder } from "../components/ItemsToOrderContext"; // Import the useItemsToOrder hook
+import ColdItemsComponent from "../components/ColdItemsComponent";
+import DryItemsComponent from "../components/DryItemsComponent";
+import OrderDetails from "../components/OrderDetails";
 
 export default function HomeScreen() {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values

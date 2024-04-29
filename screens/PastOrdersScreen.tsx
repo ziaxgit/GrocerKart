@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function PastOrders() {
+export default function PastOrdersScreen() {
   return (
     <View>
       <Text>Settings</Text>
