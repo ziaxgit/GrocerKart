@@ -51,7 +51,7 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
   return (
     <View
       className={`shadow-sm flex-row justify-between ${
-        isQuantityChanged && Number(quantity) > 0 ? "bg-green-200" : "bg-white"
+        isQuantityChanged && Number(quantity) > 0 ? "bg-green-300" : "bg-white"
       } py-1 px-2 m-1 rounded-xl`}
     >
       <View className="justify-center">
@@ -59,7 +59,7 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
       </View>
       <View className="flex-row gap-1 justify-center">
         <TouchableOpacity onPress={decrementQuantity}>
-          <AntDesign name="minuscircleo" size={24} color="red" />
+          <Entypo name="squared-minus" size={24} color="red" />
         </TouchableOpacity>
 
         <TextInput
@@ -72,7 +72,7 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
           value={quantity}
         />
         <TouchableOpacity onPress={incrementQuantity}>
-          <AntDesign name="pluscircleo" size={24} color="green" />
+          <Entypo name="squared-plus" size={24} color="green" />
         </TouchableOpacity>
       </View>
     </View>
