@@ -10,11 +10,11 @@ import {
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import * as Clipboard from "expo-clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { generateFilename } from "../utils/generateFilename";
 
 const OrderDetails: React.FC = () => {
-  const { coldItems, dryItems } = useItemsToOrder();
+  const { coldItems, dryItems, setOrdersList, ordersList } = useItemsToOrder();
 
-  // Function to generate a string of items separated by a line break
   const generateItemsString = (items: any[]) => {
     return items
       .map((item: any) => `${item.quantity} x ${item.name}`)
@@ -24,36 +24,33 @@ const OrderDetails: React.FC = () => {
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(combinedItemsString);
     alert("Order copied to clipboard!");
-    await saveOrderDetails("order_details.txt", combinedItemsString);
-    alert("Order details saved as order_details.txt");
+    await saveOrderDetails(combinedItemsString);
+    // alert("Order details saved as order_details.txt");
   };
 
   // Function to save the order details as a text file
-  const saveOrderDetails = async (filename, content) => {
+  const saveOrderDetails = async (orderDetails: string) => {
     try {
-      await AsyncStorage.setItem(filename, content);
-      console.log("Order details saved as:", filename);
+      const filename = generateFilename();
+      const order = { id: Date.now(), filename, orderDetails };
+      const updateOrders = [...ordersList, order];
+      setOrdersList(updateOrders);
+      await AsyncStorage.setItem("orders", JSON.stringify(updateOrders));
+      console.log("Order details saved as:", order);
     } catch (error) {
       console.error("Error saving order details:", error);
     }
   };
 
-  // Generate strings for cold and dry items
   const coldItemsString = generateItemsString(coldItems);
   const dryItemsString = generateItemsString(dryItems);
 
-  // Add an extra line break between cold and dry items
+  const renderTodaysDate = generateFilename().slice(0, 10);
   const combinedItemsString = coldItemsString + "\n\n" + dryItemsString;
   return (
-    // <Modal
-    //   visible={isModalVisible}
-    //   animationType="slide"
-    //   presentationStyle="fullScreen"
-    // >
-    //   <SafeAreaProvider>
     <ScrollView>
       <View>
-        <Text>ORDER DETAILS</Text>
+        <Text>ORDER FOR {renderTodaysDate + "\n"}</Text>
         <Text>{combinedItemsString}</Text>
       </View>
       <View style={styles.buttonContainer}>
@@ -64,17 +61,11 @@ const OrderDetails: React.FC = () => {
         >
           <Text style={styles.buttonText}>COPY ORDER</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          className="rounded-full"
-          onPress={() => setIsModalVisible(false)}
-          style={styles.button}
-        >
+        <TouchableOpacity className="rounded-full" style={styles.button}>
           <Text style={styles.buttonText}>Go Back</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
-    // </SafeAreaProvider>
-    // </Modal>
   );
 };
 

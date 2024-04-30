@@ -1,50 +1,37 @@
 import {
   SafeAreaView,
   View,
+  FlatList,
   ScrollView,
   Text,
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
-
-const RenderData = (content) => {
-  return (
-    <View>
-      <Text>{content}</Text>
-    </View>
-  );
-};
+import { useEffect, useState } from "react";
+import { useItemsToOrder } from "../components/ItemsToOrderContext";
 
 export default function PastOrdersScreen() {
-  // Function to read the saved text file
-  const [data, setData] = useState("");
-  const [showData, setShowData] = useState(false);
-  const readOrderDetails = async (filename) => {
-    try {
-      const content = await AsyncStorage.getItem(filename);
-      if (content !== null) {
-        console.log("Order details retrieved:", content);
-        // Handle how you want to display or use the order details
-        setData(content);
-        setShowData(true);
-      } else {
-        console.error("File not found:", filename);
+  const { setOrdersList, ordersList } = useItemsToOrder();
+  console.log("====================================");
+  console.log(ordersList);
+  console.log("====================================");
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const orders = await AsyncStorage.getItem("orders");
+        if (orders) {
+          setOrdersList(JSON.parse(orders));
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
       }
-    } catch (error) {
-      console.error("Error reading file:", error);
-    }
-  };
+    };
+    fetchOrders();
+  }, []);
 
   return (
     <View>
-      <TouchableOpacity
-        className="rounded-full"
-        onPress={() => readOrderDetails("order_details.txt")}
-      >
-        <Text>View file</Text>
-      </TouchableOpacity>
-      {showData && <RenderData content={data} />}
+      <Text>Past Orders Screen</Text>
     </View>
   );
 }

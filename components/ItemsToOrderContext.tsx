@@ -14,6 +14,8 @@ interface ItemsToOrderContextType {
   resetOrderItems: () => void;
   resetItems: boolean;
   setResetItems: (reset: boolean) => void;
+  ordersList: any[];
+  setOrdersList: (orders: any[]) => void;
 }
 
 const ItemsToOrderContext = createContext<ItemsToOrderContextType | undefined>(
@@ -39,7 +41,8 @@ export const ItemsToOrderProvider: React.FC<ItemsToOrderProviderProps> = ({
 }) => {
   const [coldItems, setColdItems] = useState<Item[]>([]);
   const [dryItems, setDryItems] = useState<Item[]>([]);
-  const [resetItems, setResetItems] = useState<boolean>(false); // New state to trigger item reset
+  const [resetItems, setResetItems] = useState<boolean>(false);
+  const [ordersList, setOrdersList] = useState<any[]>([]);
 
   const addColdItemToOrder = (item: Item) => {
     if (parseInt(item.quantity) > 0) {
@@ -101,6 +104,8 @@ export const ItemsToOrderProvider: React.FC<ItemsToOrderProviderProps> = ({
         resetOrderItems,
         resetItems,
         setResetItems,
+        ordersList,
+        setOrdersList,
       }}
     >
       {children}
