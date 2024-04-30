@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, ScrollView, Text, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { useItemsToOrder } from "../components/ItemsToOrderContext"; // Import the useItemsToOrder hook
 import ColdItemsComponent from "../components/ColdItemsComponent";
 import DryItemsComponent from "../components/DryItemsComponent";
-import OrderDetails from "../components/OrderDetails";
 
 export default function HomeScreen({ navigation }) {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values
 
   const handleResetClick = () => {
     resetOrderItems();
-    alert("Order resetted");
+    Alert.alert("Alert", "Order cleared", [
+      {
+        text: "Ok",
+        style: "cancel",
+      },
+    ]);
   };
 
   return (

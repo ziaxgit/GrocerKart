@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
-import { AntDesign } from "@expo/vector-icons";
 import * as Haptic from "expo-haptics";
-import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 interface Props {
@@ -58,10 +56,9 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
         <Text>{itemName}</Text>
       </View>
       <View className="flex-row gap-1 justify-center">
-        <TouchableOpacity onPress={decrementQuantity}>
-          <Entypo name="squared-minus" size={24} color="red" />
+        <TouchableOpacity onPress={incrementQuantity}>
+          <Entypo name="squared-plus" size={24} color={"green"} />
         </TouchableOpacity>
-
         <TextInput
           className="bg-white w-7 text-center font-semibold rounded-full"
           // onChangeText={handleQuantityChange}
@@ -71,8 +68,8 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
           returnKeyType="done"
           value={quantity}
         />
-        <TouchableOpacity onPress={incrementQuantity}>
-          <Entypo name="squared-plus" size={24} color="green" />
+        <TouchableOpacity onPress={decrementQuantity}>
+          <Entypo name="squared-minus" size={24} color="red" />
         </TouchableOpacity>
       </View>
     </View>

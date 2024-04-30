@@ -8,12 +8,11 @@ import {
   ScrollView,
 } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Clipboard from "expo-clipboard";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OrderDetails: React.FC = () => {
   const { coldItems, dryItems } = useItemsToOrder();
-  const [isModalVisible, setIsModalVisible] = useState(true);
 
   // Function to generate a string of items separated by a line break
   const generateItemsString = (items: any[]) => {
@@ -25,6 +24,18 @@ const OrderDetails: React.FC = () => {
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(combinedItemsString);
     alert("Order copied to clipboard!");
+    await saveOrderDetails("order_details.txt", combinedItemsString);
+    alert("Order details saved as order_details.txt");
+  };
+
+  // Function to save the order details as a text file
+  const saveOrderDetails = async (filename, content) => {
+    try {
+      await AsyncStorage.setItem(filename, content);
+      console.log("Order details saved as:", filename);
+    } catch (error) {
+      console.error("Error saving order details:", error);
+    }
   };
 
   // Generate strings for cold and dry items
