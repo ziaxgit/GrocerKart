@@ -36,7 +36,7 @@ const OrderDetails: React.FC = () => {
       const updateOrders = [...ordersList, order];
       setOrdersList(updateOrders);
       await AsyncStorage.setItem("orders", JSON.stringify(updateOrders));
-      console.log("Order details saved as:", order);
+      // console.log("Order details saved as:", order);
     } catch (error) {
       console.error("Error saving order details:", error);
     }

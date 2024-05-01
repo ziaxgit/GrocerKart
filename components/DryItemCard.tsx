@@ -46,7 +46,7 @@ const DryItemCard: React.FC<Props> = ({ itemName }) => {
   }, [resetItems]);
   return (
     <View
-      className={`shadow-sm flex-row justify-between ${
+      className={`shadow-md flex-row justify-between ${
         isQuantityChanged && Number(quantity) > 0 ? "bg-green-300" : "bg-white"
       } py-1 px-2 m-1 rounded-xl`}
     >

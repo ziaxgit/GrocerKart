@@ -1,10 +1,10 @@
 // ColdItemCard.tsx
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Easing } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import * as Haptic from "expo-haptics";
 import { Entypo } from "@expo/vector-icons";
-
+import Animated, { FadeIn, RotateInDownLeft } from "react-native-reanimated";
 interface Props {
   itemName: string;
 }
@@ -48,7 +48,7 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
 
   return (
     <View
-      className={`shadow-sm flex-row justify-between ${
+      className={`shadow-md flex-row justify-between ${
         isQuantityChanged && Number(quantity) > 0 ? "bg-green-300" : "bg-white"
       } py-1 px-2 m-1 rounded-xl`}
     >
