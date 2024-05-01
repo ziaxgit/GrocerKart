@@ -15,8 +15,8 @@ const ModalSingleOrder = ({
   setModalVisible,
   modalVisible,
 }: Props) => {
-  console.log(filename, "modal filename");
-  console.log(orderDetails, "modal orderDetails");
+  // console.log(filename, "<<<< modal filename");
+  // console.log(orderDetails, "<<<< modal orderDetails");
 
   return (
     <Modal
@@ -25,9 +25,9 @@ const ModalSingleOrder = ({
       presentationStyle="pageSheet"
       onRequestClose={() => setModalVisible(false)}
     >
-      <View className="px-2 bg-red-300 shadow-md ">
-        <Text className="m-2 text-center font-semibold text-lg">
-          ORDER FOR {filename}
+      <View className="px-2 bg-blue-400 shadow-md ">
+        <Text className="m-2 py-3 text-center font-semibold text-lg">
+          ORDER: {filename}
         </Text>
       </View>
       <View className="p-4 bg-blue-100 rounded-xl">

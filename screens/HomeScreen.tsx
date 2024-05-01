@@ -25,13 +25,13 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView className="bg-" style={{ flex: 1 }}>
+    <SafeAreaView className="bg-blue-100" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         <StatusBar style="auto" />
         <ColdItemsComponent />
         <DryItemsComponent />
         <TouchableOpacity
-          className="rounded-full p-3 mb-2 bg-blue-500 mx-2"
+          className="rounded-full p-3 mb-2 bg-blue-600 mx-2"
           onPress={() => navigation.navigate("OrderDetails")}
         >
           <Text className="text-white font-bold text-center">
@@ -40,7 +40,7 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleResetClick}
-          className="rounded-full p-3 mb-2 bg-gray-600 mx-2"
+          className="rounded-full p-3 mb-2 bg-zinc-600 mx-2"
         >
           <Text className="text-white font-bold text-center">RESET</Text>
         </TouchableOpacity>

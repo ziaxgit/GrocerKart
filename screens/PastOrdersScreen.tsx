@@ -29,31 +29,45 @@ export default function PastOrdersScreen() {
   //   fetchOrders();
   //   console.log(ordersList, "<<ASYNC ORDER LIST");
   // }, []);
-  console.log(ordersList, "<<ASYNC ORDER LIST");
+  // console.log(ordersList, "<<ASYNC ORDER LIST");
+
+  const [orderToDisplay, setOrderToDisplay] = useState({
+    filename: "",
+    orderDetails: "",
+  });
+
+  console.log(orderToDisplay, "<<<< ORDER TO DISPLAY");
 
   return (
-    <View className="m-2">
+    <ScrollView className="p-2 bg-blue-100 h-full">
+      <Text className="text-center m-2">Click to view order details</Text>
       {ordersList.map((order: any) => (
         <View
           key={order.id}
-          className=" bg-white p-2 rounded-xl justify-center shadow-sm m-2"
+          className=" bg-white h-14 p-2 rounded-xl justify-center shadow-sm m-2"
         >
-          <TouchableOpacity onPress={() => setModalVisible(true)}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(true);
+              setOrderToDisplay(order);
+              console.log(order, "<<<< ACTUAL ORDER");
+
+              // console.log(order.filename, "<<<< ORDER");
+            }}
+          >
             <Text className="text-base font-semibold text-center">
               {order.filename}
             </Text>
           </TouchableOpacity>
-          <Text>{order.orderDetails}</Text>
-          {modalVisible && (
-            <ModalSingleOrder
-              orderDetails={order.orderDetails}
-              filename={order.filename}
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
-            />
-          )}
+          {/* <Text>{order.orderDetails}</Text> */}
+          <ModalSingleOrder
+            orderDetails={orderToDisplay.orderDetails}
+            filename={orderToDisplay.filename}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 }
