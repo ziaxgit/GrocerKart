@@ -12,7 +12,7 @@ import { useItemsToOrder } from "../components/ItemsToOrderContext";
 import ModalSingleOrder from "../components/ModalSingleOrder";
 
 export default function PastOrdersScreen() {
-  const { setOrdersList, ordersList } = useItemsToOrder();
+  const { ordersList } = useItemsToOrder();
   const [modalVisible, setModalVisible] = useState(false);
   // useEffect(() => {
   //   const fetchOrders = async () => {
@@ -35,11 +35,10 @@ export default function PastOrdersScreen() {
     filename: "",
     orderDetails: "",
   });
-
-  console.log(orderToDisplay, "<<<< ORDER TO DISPLAY");
+  console.log(orderToDisplay, "<<<< orderToDisplay");
 
   return (
-    <ScrollView className="p-2 bg-blue-100 h-full">
+    <ScrollView className="p-2 bg-gray-100 h-full">
       <Text className="text-center m-2">Click to view order details</Text>
       {ordersList.map((order: any) => (
         <View
@@ -49,17 +48,13 @@ export default function PastOrdersScreen() {
           <TouchableOpacity
             onPress={() => {
               setModalVisible(true);
-              setOrderToDisplay(order);
-              console.log(order, "<<<< ACTUAL ORDER");
-
-              // console.log(order.filename, "<<<< ORDER");
+              setOrderToDisplay({ ...order });
             }}
           >
             <Text className="text-base font-semibold text-center">
               {order.filename}
             </Text>
           </TouchableOpacity>
-          {/* <Text>{order.orderDetails}</Text> */}
           <ModalSingleOrder
             orderDetails={orderToDisplay.orderDetails}
             filename={orderToDisplay.filename}

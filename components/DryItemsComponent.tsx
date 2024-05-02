@@ -6,12 +6,7 @@ import DryItemCard from "./DryItemCard";
 const DryItemsComponent: React.FC = () => {
   return (
     <View style={{ padding: 10 }}>
-      <Text
-        className="mx-2 text-base"
-        style={{ fontWeight: "bold", marginBottom: 5 }}
-      >
-        DRY ITEMS
-      </Text>
+      <Text className="font-bold mx-2 -mt-1 text-base">DRY ITEMS</Text>
       {dryItemsData.map((item: string, index: number) => (
         <DryItemCard key={index} itemName={item} />
       ))}

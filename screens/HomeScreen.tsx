@@ -11,7 +11,7 @@ import { useItemsToOrder } from "../components/ItemsToOrderContext"; // Import t
 import ColdItemsComponent from "../components/ColdItemsComponent";
 import DryItemsComponent from "../components/DryItemsComponent";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation }: any) {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values
 
   const handleResetClick = () => {
@@ -25,13 +25,13 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView className="bg-blue-100" style={{ flex: 1 }}>
+    <SafeAreaView className="bg-gray-100" style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
         <StatusBar style="auto" />
         <ColdItemsComponent />
         <DryItemsComponent />
         <TouchableOpacity
-          className="rounded-full p-3 mb-2 bg-blue-600 mx-2"
+          className="rounded-full p-3 mb-2 bg-blue-600 mx-3"
           onPress={() => navigation.navigate("OrderDetails")}
         >
           <Text className="text-white font-bold text-center">
@@ -39,8 +39,8 @@ export default function HomeScreen({ navigation }) {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          className="rounded-full p-3 mb-2 bg-zinc-600 mx-3"
           onPress={handleResetClick}
-          className="rounded-full p-3 mb-2 bg-zinc-600 mx-2"
         >
           <Text className="text-white font-bold text-center">RESET</Text>
         </TouchableOpacity>

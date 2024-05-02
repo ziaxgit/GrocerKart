@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Modal,
+  Alert,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
@@ -12,8 +13,9 @@ import * as Clipboard from "expo-clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { generateFilename } from "../utils/generateFilename";
 
-const OrderDetails: React.FC = () => {
-  const { coldItems, dryItems, setOrdersList, ordersList } = useItemsToOrder();
+const OrderDetails: React.FC = ({ navigation }: any) => {
+  const { coldItems, dryItems, setOrdersList, ordersList, setResetItems } =
+    useItemsToOrder();
 
   const generateItemsString = (items: any[]) => {
     return items
@@ -22,10 +24,20 @@ const OrderDetails: React.FC = () => {
   };
 
   const copyToClipboard = async () => {
-    await Clipboard.setStringAsync(combinedItemsString);
-    alert("Order copied to clipboard!");
+    await Clipboard.setStringAsync(
+      "ORDER FOR " + renderTodaysDate + "\n" + combinedItemsString
+    );
+    Alert.alert("Order Copied!", "You can view it in Order History", [
+      {
+        text: "Ok",
+        style: "cancel",
+        onPress() {
+          navigation.navigate("Home");
+          setResetItems(true);
+        },
+      },
+    ]);
     await saveOrderDetails(combinedItemsString);
-    // alert("Order details saved as order_details.txt");
   };
 
   // Function to save the order details as a text file
@@ -48,49 +60,27 @@ const OrderDetails: React.FC = () => {
   const renderTodaysDate = generateFilename().slice(0, 10);
   const combinedItemsString = coldItemsString + "\n\n" + dryItemsString;
   return (
-    <ScrollView>
-      <View>
+    <ScrollView className="bg-gray-100 p-3">
+      <View className="mb-1 ml-1 bg-white p-2 rounded-xl shadow-sm">
         <Text>ORDER FOR {renderTodaysDate + "\n"}</Text>
         <Text>{combinedItemsString}</Text>
       </View>
-      <View style={styles.buttonContainer}>
+      <View className="flex-row justify-around mb-10">
         <TouchableOpacity
-          className="rounded-full"
+          className="rounded-full p-3 m-2 bg-blue-600 mx-1 w-44"
           onPress={copyToClipboard}
-          style={styles.button}
         >
-          <Text style={styles.buttonText}>COPY ORDER</Text>
+          <Text className="text-white font-bold text-center">COPY ORDER</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="rounded-full" style={styles.button}>
-          <Text style={styles.buttonText}>Go Back</Text>
+        <TouchableOpacity
+          className="rounded-full p-3 m-2 bg-zinc-600 mx-1 w-44"
+          onPress={() => navigation.goBack()}
+        >
+          <Text className="text-white font-bold text-center">EDIT ORDER</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "space-between",
-    padding: 20,
-    backgroundColor: "gray",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  button: {
-    backgroundColor: "#008000",
-    padding: 10,
-    borderRadius: 5,
-    width: "48%", // Adjust button width as needed
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-});
 
 export default OrderDetails;
