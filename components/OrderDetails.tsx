@@ -25,7 +25,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
 
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(
-      "ORDER FOR " + renderTodaysDate + "\n" + combinedItemsString
+      "ORDER FOR " + renderTodaysDate + "\n\n" + combinedItemsString
     );
     Alert.alert("Order Copied!", "You can view it in Order History", [
       {

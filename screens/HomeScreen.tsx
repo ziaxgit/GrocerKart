@@ -15,11 +15,16 @@ export default function HomeScreen({ navigation }: any) {
   const { resetOrderItems } = useItemsToOrder(); // Use the useItemsToOrder hook to access context values
 
   const handleResetClick = () => {
-    resetOrderItems();
-    Alert.alert("Alert", "Order cleared", [
+    Alert.alert("Alert", "This will reset your current list", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
       {
         text: "Ok",
-        style: "cancel",
+        onPress() {
+          resetOrderItems();
+        },
       },
     ]);
   };
