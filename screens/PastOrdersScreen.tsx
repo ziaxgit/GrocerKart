@@ -43,7 +43,7 @@ export default function PastOrdersScreen() {
       {ordersList.map((order: any) => (
         <View
           key={order.id}
-          className=" bg-white h-14 p-2 rounded-xl justify-center shadow-sm m-2"
+          className=" bg-blue-300 h-14 p-2 rounded-xl justify-center shadow-sm m-2"
         >
           <TouchableOpacity
             onPress={() => {

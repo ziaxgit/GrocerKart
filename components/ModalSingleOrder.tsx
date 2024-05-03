@@ -26,7 +26,7 @@ const ModalSingleOrder = ({
       presentationStyle="pageSheet"
       onRequestClose={() => setModalVisible(false)}
     >
-      <View className="bg-blue-400 shadow-md ">
+      <View className="bg-blue-300 shadow-md ">
         <Text className="m-2 py-3 text-center font-semibold text-lg">
           ORDER: {filename}
         </Text>
