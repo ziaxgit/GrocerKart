@@ -1,14 +1,20 @@
-// PastOrdersScreen.js
+import React, { useEffect, useState } from "react";
 import { Alert, View, ScrollView, Text, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
 import { useItemsToOrder } from "../components/ItemsToOrderContext";
 import ModalSingleOrder from "../components/ModalSingleOrder";
+
+// Define a type for an order object
+interface Order {
+  id: number;
+  filename: string;
+  orderDetails: string;
+}
 
 export default function PastOrdersScreen() {
   const { ordersList, setOrdersList } = useItemsToOrder();
   const [modalVisible, setModalVisible] = useState(false);
-  const [orderToDisplay, setOrderToDisplay] = useState({
+  const [orderToDisplay, setOrderToDisplay] = useState<Order>({
     id: 0,
     filename: "",
     orderDetails: "",
@@ -41,7 +47,9 @@ export default function PastOrdersScreen() {
     // Get the orders from AsyncStorage
     AsyncStorage.getItem("orders").then((orders) => {
       if (orders) {
-        setOrdersList(JSON.parse(orders));
+        // Parse the orders and sort them in descending order by id
+        const sortedOrders: Order[] = JSON.parse(orders);
+        setOrdersList(sortedOrders);
       }
     });
   }, []);
@@ -52,7 +60,7 @@ export default function PastOrdersScreen() {
       {ordersList.map((order) => (
         <View
           key={order.id}
-          className=" bg-blue-300 h-14 p-2 rounded-xl justify-center shadow-sm m-2"
+          className="bg-blue-300 h-14 p-2 rounded-xl justify-center shadow-sm m-2"
         >
           <TouchableOpacity
             onPress={() => {

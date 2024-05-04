@@ -45,7 +45,8 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
     try {
       const filename = generateFilename();
       const order = { id: Date.now(), filename, orderDetails };
-      const updateOrders = [...ordersList, order];
+      const updateOrders = [...ordersList, order].sort((a, b) => b.id - a.id);
+
       setOrdersList(updateOrders);
       await AsyncStorage.setItem("orders", JSON.stringify(updateOrders));
       // console.log("Order details saved as:", order);
