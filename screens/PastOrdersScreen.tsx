@@ -1,19 +1,12 @@
 // PastOrdersScreen.js
-import {
-  Alert,
-  View,
-  FlatList,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { Alert, View, ScrollView, Text, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { useItemsToOrder } from "../components/ItemsToOrderContext";
 import ModalSingleOrder from "../components/ModalSingleOrder";
 
 export default function PastOrdersScreen() {
-  const { ordersList, setOrdersList } = useItemsToOrder(); // Added setOrdersList
+  const { ordersList, setOrdersList } = useItemsToOrder();
   const [modalVisible, setModalVisible] = useState(false);
   const [orderToDisplay, setOrderToDisplay] = useState({
     id: 0,
@@ -52,10 +45,6 @@ export default function PastOrdersScreen() {
       }
     });
   }, []);
-
-  console.log("====================================");
-  console.log(ordersList);
-  console.log("====================================");
 
   return (
     <ScrollView className="p-2 bg-gray-100 h-full">
