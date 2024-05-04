@@ -1,5 +1,6 @@
+// PastOrdersScreen.js
 import {
-  SafeAreaView,
+  Alert,
   View,
   FlatList,
   ScrollView,
@@ -12,35 +13,54 @@ import { useItemsToOrder } from "../components/ItemsToOrderContext";
 import ModalSingleOrder from "../components/ModalSingleOrder";
 
 export default function PastOrdersScreen() {
-  const { ordersList } = useItemsToOrder();
+  const { ordersList, setOrdersList } = useItemsToOrder(); // Added setOrdersList
   const [modalVisible, setModalVisible] = useState(false);
-  // useEffect(() => {
-  //   const fetchOrders = async () => {
-  //     try {
-  //       const orders = await AsyncStorage.getItem("orders");
-  //       // if (orders) {
-  //       //   setOrdersList(JSON.parse(orders));
-  //       // }
-  //     } catch (error) {
-  //       console.error("Error fetching orders:", error);
-  //     }
-  //   };
-  //   // AsyncStorage.clear();
-  //   fetchOrders();
-  //   console.log(ordersList, "<<ASYNC ORDER LIST");
-  // }, []);
-  // console.log(ordersList, "<<ASYNC ORDER LIST");
-
   const [orderToDisplay, setOrderToDisplay] = useState({
+    id: 0,
     filename: "",
     orderDetails: "",
   });
-  console.log(orderToDisplay, "<<<< orderToDisplay");
+
+  const handleDeleteOrder = (orderId: number) => {
+    // Filter out the order with the specified orderId
+    Alert.alert("Alert", "Delete this order from history?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Ok",
+        onPress() {
+          const updatedOrders = ordersList.filter(
+            (order) => order.id !== orderId
+          );
+          setOrdersList(updatedOrders);
+          // Update AsyncStorage
+          AsyncStorage.setItem("orders", JSON.stringify(updatedOrders));
+          // Close the modal after deleting
+          setModalVisible(false);
+        },
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    // Get the orders from AsyncStorage
+    AsyncStorage.getItem("orders").then((orders) => {
+      if (orders) {
+        setOrdersList(JSON.parse(orders));
+      }
+    });
+  }, []);
+
+  console.log("====================================");
+  console.log(ordersList);
+  console.log("====================================");
 
   return (
     <ScrollView className="p-2 bg-gray-100 h-full">
-      <Text className="text-center m-2">Click to view order details</Text>
-      {ordersList.map((order: any) => (
+      <Text className="text-center m-1">Click to view order details</Text>
+      {ordersList.map((order) => (
         <View
           key={order.id}
           className=" bg-blue-300 h-14 p-2 rounded-xl justify-center shadow-sm m-2"
@@ -56,10 +76,10 @@ export default function PastOrdersScreen() {
             </Text>
           </TouchableOpacity>
           <ModalSingleOrder
-            orderDetails={orderToDisplay.orderDetails}
-            filename={orderToDisplay.filename}
+            order={orderToDisplay}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            onDelete={() => handleDeleteOrder(orderToDisplay.id)}
           />
         </View>
       ))}
