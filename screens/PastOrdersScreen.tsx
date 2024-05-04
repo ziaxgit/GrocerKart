@@ -47,9 +47,7 @@ export default function PastOrdersScreen() {
     // Get the orders from AsyncStorage
     AsyncStorage.getItem("orders").then((orders) => {
       if (orders) {
-        // Parse the orders and sort them in descending order by id
-        const sortedOrders: Order[] = JSON.parse(orders);
-        setOrdersList(sortedOrders);
+        setOrdersList(JSON.parse(orders));
       }
     });
   }, []);

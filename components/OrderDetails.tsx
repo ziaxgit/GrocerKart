@@ -14,6 +14,8 @@ import * as Clipboard from "expo-clipboard";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { generateFilename } from "../utils/generateFilename";
 import { EvilIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const OrderDetails: React.FC = ({ navigation }: any) => {
   const { coldItems, dryItems, setOrdersList, ordersList, setResetItems } =
@@ -107,27 +109,36 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
         <Text>{combinedItemsString}</Text>
       </View>
       <View className="flex-col justify-around mb-10">
-        <View>
+        <View className="flex-row items-center justify-center mx-2">
           <TouchableOpacity
-            className="rounded-full p-3 m-2 bg-blue-600 mx-1"
-            onPress={copyToClipboard}
-          >
-            <Text className="text-white font-bold text-center">COPY ORDER</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="rounded-full p-3 m-2 bg-zinc-600 mx-1"
+            className="rounded-full p-3 bg-zinc-600 mx-1 w-1/2"
             onPress={() => navigation.goBack()}
           >
-            <Text className="text-white font-bold text-center">EDIT ORDER</Text>
+            <View className="flex-row items-center justify-center gap-1">
+              <Feather name="edit" size={18} color="white" />
+              <Text className="text-white font-bold text-center">
+                EDIT ORDER
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="rounded-full p-3 m-2 bg-zinc-600 mx-1 w-1/2"
+            onPress={handleOnShare}
+          >
+            <View className="flex-row items-center justify-center">
+              <EvilIcons name="share-apple" size={28} color="white" />
+              <Text className="text-white font-bold text-center">SHARE</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          className="rounded-full p-3 m-2 bg-zinc-600 mx-1"
-          onPress={handleOnShare}
+          className="rounded-full p-3 m-1 bg-blue-600"
+          onPress={copyToClipboard}
         >
-          <View className="flex-row items-center justify-center">
-            <EvilIcons name="share-apple" size={24} color="white" />
-            <Text className="text-white font-bold text-center">SHARE</Text>
+          <View className="flex-row items-center justify-center gap-1">
+            <Ionicons name="copy-outline" size={18} color="white" />
+            <Text className="text-white font-bold text-center">COPY ORDER</Text>
           </View>
         </TouchableOpacity>
       </View>
