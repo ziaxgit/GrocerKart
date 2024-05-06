@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Modal,
   Share,
   Alert,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
 } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
@@ -15,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { generateFilename } from "../utils/generateFilename";
 import { EvilIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Octicons } from "@expo/vector-icons";
 
 const OrderDetails: React.FC = ({ navigation }: any) => {
   const { coldItems, dryItems, setOrdersList, ordersList, setResetItems } =
@@ -29,17 +27,20 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
 
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync(orderWithDate);
-    Alert.alert("Order Copied!", "You can view it in Order History", [
+    Alert.alert("Order copied!", "Save this order in Order History?", [
       {
-        text: "Ok",
+        text: "No",
+      },
+      {
+        text: "Yes",
         style: "cancel",
-        onPress() {
+        async onPress() {
           navigation.navigate("Home");
           setResetItems(true);
+          await saveOrderDetails(combinedItemsString);
         },
       },
     ]);
-    await saveOrderDetails(combinedItemsString);
   };
 
   // Function to save the order details as a text file
@@ -65,34 +66,35 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
       if (result.action === Share.sharedAction) {
         if (result) {
           // shared with activity type of result.activityType
-          Alert.alert(
-            "Alert",
-            "Do you want to save this order to Order History?",
-            [
-              {
-                text: "No",
-              },
-              {
-                text: "Yes",
-                async onPress() {
-                  try {
-                    await saveOrderDetails(combinedItemsString);
-                    setResetItems(true);
-                    navigation.navigate("Home");
-                    alert("Order saved to Order History!");
-                  } catch (error) {
-                    console.error("Error saving order details:", error);
-                  }
-                },
-              },
-            ]
-          );
+          saveOrderAlert();
         }
       }
     } catch (error: any) {
       Alert.alert(error.message);
     }
   };
+
+  function saveOrderAlert() {
+    Alert.alert("Alert", "Save this order in Order History?", [
+      {
+        text: "No",
+      },
+      {
+        text: "Yes",
+        style: "cancel",
+        async onPress() {
+          try {
+            await saveOrderDetails(combinedItemsString);
+            setResetItems(true);
+            navigation.navigate("Home");
+            alert("Order saved to Order History!");
+          } catch (error) {
+            console.error("Error saving order details:", error);
+          }
+        },
+      },
+    ]);
+  }
 
   const coldItemsString = generateItemsString(coldItems);
   const dryItemsString = generateItemsString(dryItems);
@@ -115,7 +117,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
             onPress={() => navigation.goBack()}
           >
             <View className="flex-row items-center justify-center gap-1">
-              <Feather name="edit" size={18} color="white" />
+              <Feather name="edit" size={16} color="white" />
               <Text className="text-white font-bold text-center">
                 EDIT ORDER
               </Text>
@@ -126,8 +128,11 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
             className="rounded-full p-3 m-2 bg-zinc-600 mx-1 w-1/2"
             onPress={handleOnShare}
           >
-            <View className="flex-row items-center justify-center">
-              <EvilIcons name="share-apple" size={28} color="white" />
+            <View className="flex-row items-center justify-center gap-">
+              <EvilIcons name="share-apple" size={24} color="white" />
+              {/* <Feather name="share" size={18} color="white" /> */}
+              {/* <Ionicons name="share-outline" size={20} color="white" /> */}
+              {/* <Octicons name="share" size={20} color="white" /> */}
               <Text className="text-white font-bold text-center">SHARE</Text>
             </View>
           </TouchableOpacity>
@@ -137,7 +142,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
           onPress={copyToClipboard}
         >
           <View className="flex-row items-center justify-center gap-1">
-            <Ionicons name="copy-outline" size={18} color="white" />
+            <Ionicons name="copy-outline" size={16} color="white" />
             <Text className="text-white font-bold text-center">COPY ORDER</Text>
           </View>
         </TouchableOpacity>

@@ -21,7 +21,8 @@ export default function HomeScreen({ navigation }: any) {
         style: "cancel",
       },
       {
-        text: "Ok",
+        text: "Reset",
+        style: "destructive",
         onPress() {
           resetOrderItems();
         },
@@ -31,7 +32,7 @@ export default function HomeScreen({ navigation }: any) {
 
   const handleConfirmClick = () => {
     if (coldItems.length === 0 && dryItems.length === 0) {
-      alert(  "You have not added any items");
+      alert("You have not added any items");
     } else {
       navigation.navigate("OrderDetails");
     }

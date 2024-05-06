@@ -28,7 +28,8 @@ export default function PastOrdersScreen() {
         style: "cancel",
       },
       {
-        text: "Ok",
+        text: "Delete",
+        style: "destructive",
         onPress() {
           const updatedOrders = ordersList.filter(
             (order) => order.id !== orderId
