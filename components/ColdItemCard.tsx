@@ -4,7 +4,6 @@ import { View, Text, TextInput, TouchableOpacity, Easing } from "react-native";
 import { useItemsToOrder } from "./ItemsToOrderContext";
 import * as Haptic from "expo-haptics";
 import { Entypo } from "@expo/vector-icons";
-import Animated, { FadeIn, RotateInDownLeft } from "react-native-reanimated";
 interface Props {
   itemName: string;
 }
@@ -13,11 +12,6 @@ const ColdItemCard: React.FC<Props> = ({ itemName }) => {
   const { addColdItemToOrder, resetItems, setResetItems } = useItemsToOrder();
   const [quantity, setQuantity] = useState("0");
   const [isQuantityChanged, setIsQuantityChanged] = useState(false);
-
-  const handleQuantityChange = (value: string) => {
-    const item = { name: itemName, quantity: quantity };
-    addColdItemToOrder(item);
-  };
 
   const incrementQuantity = () => {
     setIsQuantityChanged(true);

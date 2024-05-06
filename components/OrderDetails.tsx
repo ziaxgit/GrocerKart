@@ -35,9 +35,14 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
         text: "Yes",
         style: "cancel",
         async onPress() {
-          navigation.navigate("Home");
-          setResetItems(true);
-          await saveOrderDetails(combinedItemsString);
+          try {
+            navigation.navigate("Home");
+            setResetItems(true);
+            await saveOrderDetails(combinedItemsString);
+            alert("Order saved to Order History!");
+          } catch (error) {
+            alert("Error occurred while saving");
+          }
         },
       },
     ]);
@@ -130,9 +135,6 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
           >
             <View className="flex-row items-center justify-center gap-">
               <EvilIcons name="share-apple" size={24} color="white" />
-              {/* <Feather name="share" size={18} color="white" /> */}
-              {/* <Ionicons name="share-outline" size={20} color="white" /> */}
-              {/* <Octicons name="share" size={20} color="white" /> */}
               <Text className="text-white font-bold text-center">SHARE</Text>
             </View>
           </TouchableOpacity>
