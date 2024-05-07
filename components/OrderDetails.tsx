@@ -52,7 +52,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
   const saveOrderDetails = async (orderDetails: string) => {
     try {
       const filename = generateFilename();
-      const order = { id: Date.now(), filename, orderDetails };
+      const order = { id: Date.now() + 25, filename, orderDetails };
       const updateOrders = [...ordersList, order].sort((a, b) => b.id - a.id);
 
       setOrdersList(updateOrders);

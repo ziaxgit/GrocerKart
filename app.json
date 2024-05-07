@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "SupplyMe",
-    "slug": "SupplyMe",
+    "name": "OrderPal",
+    "slug": "OrderPal",
+    "description": "OrderPal is a mobile application for restaurants that makes ordering groceries and stock less time consuming and more efficient.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ziaxgit.OrderPal"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e8594c8e-c64b-402d-bcbf-a288de5542cf"
+      }
     }
   }
 }
