@@ -16,7 +16,6 @@ export default function HomeNavigation() {
           tabBarLabel: "Create Order",
           headerTitle: "Grocery Order",
           tabBarShowLabel: true,
-
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="plus-circle"
