@@ -3,7 +3,7 @@
     "name": "OrderPal",
     "slug": "OrderPal",
     "description": "OrderPal is a mobile application for restaurants that makes ordering groceries and stock less time consuming and more efficient.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,12 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ziaxgit.OrderPal"
+      "bundleIdentifier": "com.ziaxgit.OrderPal", 
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
