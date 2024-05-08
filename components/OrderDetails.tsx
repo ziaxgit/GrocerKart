@@ -25,29 +25,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
       .join("\n");
   };
 
-  const copyToClipboard = async () => {
-    await Clipboard.setStringAsync(orderWithDate);
-    Alert.alert("Order copied!", "Save this order in Order History?", [
-      {
-        text: "No",
-      },
-      {
-        text: "Yes",
-        style: "cancel",
-        async onPress() {
-          try {
-            navigation.navigate("Home");
-            setResetItems(true);
-            await saveOrderDetails(combinedItemsString);
-            alert("Order saved to Order History!");
-          } catch (error) {
-            alert("Error occurred while saving");
-          }
-        },
-      },
-    ]);
-  };
-
+  
   // Function to save the order details as a text file
   const saveOrderDetails = async (orderDetails: string) => {
     try {
@@ -78,7 +56,7 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
       Alert.alert(error.message);
     }
   };
-
+  
   function saveOrderAlert() {
     Alert.alert("Alert", "Save this order in Order History?", [
       {
@@ -100,6 +78,28 @@ const OrderDetails: React.FC = ({ navigation }: any) => {
       },
     ]);
   }
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(orderWithDate);
+    Alert.alert("Order copied!", "Save this order in Order History?", [
+      {
+        text: "No",
+      },
+      {
+        text: "Yes",
+        style: "cancel",
+        async onPress() {
+          try {
+            navigation.navigate("Home");
+            setResetItems(true);
+            await saveOrderDetails(combinedItemsString);
+            alert("Order saved to Order History!");
+          } catch (error) {
+            alert("Error occurred while saving");
+          }
+        },
+      },
+    ]);
+  };
 
   const coldItemsString = generateItemsString(coldItems);
   const dryItemsString = generateItemsString(dryItems);
