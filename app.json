@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "OrderPal",
-    "slug": "OrderPal",
-    "description": "OrderPal is a mobile application for restaurants that makes ordering groceries and stock less time consuming and more efficient.",
-    "version": "1.0.1",
+    "name": "GrocerKart",
+    "slug": "GrocerKart",
+    "description": "GrocerKart is a mobile application for restaurants that makes ordering groceries and stock less time consuming and more efficient.",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,8 +15,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ziaxgit.OrderPal", 
-      "buildNumber": "2"
+      "bundleIdentifier": "com.ziaxgit.GrocerKart",
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "e8594c8e-c64b-402d-bcbf-a288de5542cf"
+        "projectId": "2ccbd76a-3d16-4662-8a94-1da55cd17ee3"
       }
-    }
+    },
+    "owner": "zia2024"
   }
 }

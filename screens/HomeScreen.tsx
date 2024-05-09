@@ -38,26 +38,22 @@ export default function HomeScreen({ navigation }: any) {
     }
   };
   return (
-    <SafeAreaView className="bg-gray-100" style={{ flex: 1 }}>
-      <ScrollView style={{ flex: 1 }}>
-        <StatusBar style="auto" />
-        <ColdItemsComponent />
-        <DryItemsComponent />
-        <TouchableOpacity
-          className="rounded-full p-3 mb-2 bg-blue-600 mx-3"
-          onPress={handleConfirmClick}
-        >
-          <Text className="text-white font-bold text-center">
-            CONFIRM ORDER
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          className="rounded-full p-3 mb-2 bg-zinc-600 mx-3"
-          onPress={handleResetClick}
-        >
-          <Text className="text-white font-bold text-center">RESET</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView>
+      <StatusBar style="auto" />
+      <ColdItemsComponent />
+      <DryItemsComponent />
+      <TouchableOpacity
+        className="rounded-full p-3 mb-2 bg-blue-600 mx-3"
+        onPress={handleConfirmClick}
+      >
+        <Text className="text-white font-bold text-center">CONFIRM ORDER</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="rounded-full p-3 mb-2 bg-zinc-600 mx-3"
+        onPress={handleResetClick}
+      >
+        <Text className="text-white font-bold text-center">RESET</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
