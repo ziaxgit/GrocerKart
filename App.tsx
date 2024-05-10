@@ -1,12 +1,10 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { ItemsToOrderProvider } from "./components/ItemsToOrderContext"; // Import the context provider
-import HomeScreen from "./screens/HomeScreen";
 import HomeNavigation from "./navigation/HomeTabNavigation";
 import { createStackNavigator } from "@react-navigation/stack";
 const Stack = createStackNavigator();
 import OrderDetails from "./components/OrderDetails";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   return (

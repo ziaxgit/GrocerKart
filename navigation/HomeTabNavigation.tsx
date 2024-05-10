@@ -10,16 +10,6 @@ export default function HomeNavigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Order History"
-        component={PastOrdersScreen}
-        options={{
-          tabBarLabel: "Order History",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="history" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="HomeTab"
         component={HomeScreen}
         options={{
@@ -32,6 +22,16 @@ export default function HomeNavigation() {
               color={color}
               size={size}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Order History"
+        component={PastOrdersScreen}
+        options={{
+          tabBarLabel: "Order History",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="history" color={color} size={size} />
           ),
         }}
       />

@@ -2,8 +2,7 @@
   "expo": {
     "name": "GrocerKart",
     "slug": "GrocerKart",
-    "description": "GrocerKart is a mobile application for restaurants that makes ordering groceries and stock less time consuming and more efficient.",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,11 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.ziaxgit.GrocerKart",
-      "buildNumber": "3"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -26,12 +25,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2ccbd76a-3d16-4662-8a94-1da55cd17ee3"
-      }
-    },
-    "owner": "zia2024"
+    }
   }
 }
