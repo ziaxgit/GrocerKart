@@ -14,11 +14,6 @@ const DryItemCard: React.FC<Props> = ({ itemName }) => {
   const [quantity, setQuantity] = useState("0");
   const [isQuantityChanged, setIsQuantityChanged] = useState(false);
 
-  const handleQuantityChange = (value: string) => {
-    const item = { name: itemName, quantity: quantity };
-    addDryItemToOrder(item);
-  };
-
   const incrementQuantity = () => {
     setIsQuantityChanged(true);
     Haptic.selectionAsync(); // Add haptic feedback
@@ -37,6 +32,7 @@ const DryItemCard: React.FC<Props> = ({ itemName }) => {
     const item = { name: itemName, quantity: updatedQuantity.toString() }; // Use the updated quantity
     addDryItemToOrder(item);
   };
+
   useEffect(() => {
     if (resetItems) {
       setQuantity("0");
@@ -44,6 +40,7 @@ const DryItemCard: React.FC<Props> = ({ itemName }) => {
       setResetItems(false);
     }
   }, [resetItems]);
+  
   return (
     <View
       className={`shadow-md flex-row justify-between ${
@@ -59,7 +56,6 @@ const DryItemCard: React.FC<Props> = ({ itemName }) => {
         </TouchableOpacity>
         <TextInput
           className="bg-white w-7 text-center font-semibold rounded-full"
-          // onChangeText={handleQuantityChange}
           readOnly={true}
           keyboardType="numeric"
           placeholder="0"
