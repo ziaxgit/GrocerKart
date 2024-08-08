@@ -1,5 +1,5 @@
 # GrocerKart 
-A custom iOS built for a restaurant that simplifies supply management, making it easier to order weekly groceries efficiently and keep track of inventory.  
+A custom iOS app built for a restaurant that simplifies supply management, making it easier to order weekly groceries efficiently and keep track of inventory.  
 
 [App store link](https://apps.apple.com/us/app/grocerkart/id6502514835?platform=iphone)  
 
