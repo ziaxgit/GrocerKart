@@ -1,6 +1,9 @@
 # GrocerKart 
 A custom iOS built for a restaurant that simplifies supply management, making it easier to order weekly groceries efficiently and keep track of inventory.  
-App store link: https://apps.apple.com/us/app/grocerkart/id6502514835?platform=iphone
+
+[App store link](https://apps.apple.com/us/app/grocerkart/id6502514835?platform=iphone)  
+
+[View app demo](https://www.linkedin.com/posts/z1aur-rahman_reactnative-typescript-nativewind-activity-7204042838785806337-LQ7B?utm_source=share&utm_medium=member_desktop)
 
 <div>
   <img src="https://github.com/user-attachments/assets/0ed940b5-d626-4830-9b7a-f22e06e78fd4" width="35%" >
